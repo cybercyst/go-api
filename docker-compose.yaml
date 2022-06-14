@@ -3,6 +3,8 @@ services:
     container_name: go-api
     build:
       dockerfile: Dockerfile.dev
+    environment:
+      ENV: dev
     volumes:
       - .:/app
     ports:

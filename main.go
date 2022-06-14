@@ -7,6 +7,7 @@ import (
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/ping", Ping)
+	r.GET("/env", Env)
 	return r
 }
 
