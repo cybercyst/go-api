@@ -4,6 +4,8 @@ metadata:
   name: go-api
   annotations:
     github.com/project-slug: cybercyst/go-api
+  tags:
+    - go
 spec:
   type: service
   lifecycle: experimental
