@@ -29,3 +29,4 @@ COPY --from=builder /app/bin/go-api .
 ENV GIN_MODE=release
 ENTRYPOINT ["./go-api"]
 
+EXPOSE 8080

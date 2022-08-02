@@ -8,5 +8,8 @@ import (
 )
 
 func Env(g *gin.Context) {
-	g.String(http.StatusOK, os.Getenv("ENV"))
+	g.JSON(http.StatusOK, gin.H{
+		"env": os.Getenv("ENV"),
+		"pod": os.Getenv("PODNAME"),
+	})
 }

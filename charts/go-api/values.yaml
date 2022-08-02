@@ -23,8 +23,6 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
-
 podSecurityContext: {}
   # fsGroup: 2000
 
@@ -61,17 +59,19 @@ resources:
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  limits:
-    cpu: 100m
   requests:
+    memory: 32Mi
     cpu: 100m
+  limits:
+    memory: 64Mi
+    cpu: 250m
 
 autoscaling:
   enabled: true
-  minReplicas: 1 
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 30
-  # targetMemoryUtilizationPercentage: 80
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 99
+  targetMemoryUtilizationPercentage: 99
 
 nodeSelector: {}
 

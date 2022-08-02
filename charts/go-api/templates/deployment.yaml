@@ -39,6 +39,10 @@ spec:
                 configMapKeyRef:
                   name: {{ include "..fullname" . }}
                   key: environment
+            - name: PODNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           ports:
             - name: http
               containerPort: 8080

@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile.dev
     environment:
       ENV: dev
+      PODNAME: not_in_k8s
     volumes:
       - .:/app
     ports:
