@@ -5,6 +5,6 @@ metadata:
   annotations:
     github.com/project-slug: cybercyst/go-api
 spec:
-  type: other
-  lifecycle: unknown
+  type: service
+  lifecycle: experimental
   owner: ddp
