@@ -1,12 +1,27 @@
 services:
-  api:
+  proxy:
+    image: nginx
+    volumes:
+      - type: bind
+        source: ./proxy/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+        read_only: true
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+  backend:
     container_name: go-api
     build:
       dockerfile: Dockerfile.dev
+    env_file:
+      - .env
     environment:
-      ENV: dev
-      PODNAME: not_in_k8s
+      ENV: ${ENV:-dev}
+      PODNAME: ${PODNAME:-go-api}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      IMAGE_UPLOAD_BUCKET: ${IMAGE_UPLOAD_BUCKET:-}
     volumes:
       - .:/app
-    ports:
-      - '8080:8080'
