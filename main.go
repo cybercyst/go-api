@@ -1,13 +1,16 @@
 package main
 
 import (
+	"go-api/routes"
+
 	"github.com/gin-gonic/gin"
 )
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
-	r.GET("/ping", Ping)
-	r.GET("/env", Env)
+	r.GET("/ping", routes.Ping)
+	r.GET("/env", routes.Env)
+	r.POST("/images", routes.UploadImage)
 	return r
 }
 
