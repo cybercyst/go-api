@@ -10,7 +10,7 @@ func setupRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/ping", routes.Ping)
 	r.GET("/env", routes.Env)
-	r.POST("/images", routes.UploadImage)
+	r.POST("/upload", routes.UploadFile)
 	return r
 }
 

@@ -22,6 +22,6 @@ services:
       PODNAME: ${PODNAME:-go-api}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
-      IMAGE_UPLOAD_BUCKET: ${IMAGE_UPLOAD_BUCKET:-}
+      FILE_UPLOAD_BUCKET: ${FILE_UPLOAD_BUCKET:-}
     volumes:
       - .:/app
