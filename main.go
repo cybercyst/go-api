@@ -2,6 +2,7 @@ package main
 
 import (
 	"go-api/routes"
+	"log"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,5 +17,8 @@ func setupRouter() *gin.Engine {
 
 func main() {
 	r := setupRouter()
-	r.Run(":8080")
+	err := r.Run(":8080")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
