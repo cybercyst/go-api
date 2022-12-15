@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+environment: test
+
 image:
   repository: docker.io/forrestloomis786/upload-api
   pullPolicy: IfNotPresent
