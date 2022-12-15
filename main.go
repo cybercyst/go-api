@@ -12,6 +12,8 @@ func setupRouter() *gin.Engine {
 	r.GET("/ping", routes.Ping)
 	r.GET("/env", routes.Env)
 	r.POST("/upload", routes.UploadFile)
+	r.GET("/readyz", routes.Readyz)
+	r.GET("/healthz", routes.Healthz)
 	return r
 }
 
