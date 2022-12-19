@@ -1,12 +1,12 @@
-# terraform {
-#   backend "s3" {
-#     bucket         = "nassau-state"
-#     dynamodb_table = "nassau-state"
-#     key            = "services/upload-api.tfstate"
-#     region         = "us-east-1"
-#     encrypt        = true
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket         = "nassau-state"
+    dynamodb_table = "nassau-state"
+    key            = "services/upload-api.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+  }
+}
 
 provider "aws" {
   region              = local.region
