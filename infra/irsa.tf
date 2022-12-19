@@ -31,6 +31,4 @@ module "terraform_irsa_role" {
   role_policy_arns = {
     WriteBucket = aws_iam_policy.write_policy.arn
   }
-
-  tags = local.tags
 }
