@@ -5,6 +5,7 @@
 replicaCount: 1
 
 environment: test
+aws_region: us-east-1
 
 image:
   repository: docker.io/forrestloomis786/upload-api
