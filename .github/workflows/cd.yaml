@@ -28,6 +28,7 @@ jobs:
           base: ${{ steps.version.outputs.version }}
           filters: |
             code:
+              - Dockerfile
               - '**/*.go'
               - 'go.mod'
               - 'go.sum'
