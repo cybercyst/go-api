@@ -43,6 +43,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: FILE_UPLOAD_BUCKET
+                valueFrom:
+                  secretKeyRef:
+                    name: {{ .Values.image.bucket_secret }}
+                    key: upload_bucket
           ports:
             - name: http
               containerPort: 8080
