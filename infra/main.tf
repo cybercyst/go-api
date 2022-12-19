@@ -19,8 +19,8 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "upload-api"
   env    = terraform.workspace
+  name   = "upload-api-${local.env}"
 
   tags = {
     TF-Managed = true
