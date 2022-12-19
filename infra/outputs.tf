@@ -1,0 +1,3 @@
+output "upload_bucket" {
+  value = aws_s3_bucket._.bucket
+}

@@ -1,16 +1,21 @@
 terraform {
   backend "s3" {
-    bucket         = "terraform-state-ddp-infra"
-    key            = "services/go-api.tfstate"
+    bucket         = "nassau-state"
+    dynamodb_table = "nassau-state"
+    key            = "services/upload-api.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "terraform-state-ddp-infra-lock"
   }
 }
 
+variable "access_key" {}
+variable "secret_key" {}
+
 provider "aws" {
   region              = local.region
-  allowed_account_ids = ["882892008441"]
+  allowed_account_ids = ["895216607862"]
+  access_key          = var.access_key
+  secret_key          = var.secret_key
 
   default_tags {
     tags = local.tags
@@ -19,7 +24,7 @@ provider "aws" {
 
 locals {
   region = "us-east-1"
-  name   = "go-api"
+  name   = "upload-api"
   env    = terraform.workspace
 
   tags = {
