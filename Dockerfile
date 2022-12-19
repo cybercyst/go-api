@@ -14,7 +14,7 @@ RUN CGO_ENABLED=0 go build -ldflags "-s -w \
 	-X github.com/cybercyst/go-api/pkg/version.REVISION=${REVISION}" \
 	-a -o bin/go-api
 
-FROM scratch
+FROM alpine
 
 ARG BUILD_DATE
 ARG VERSION
@@ -23,6 +23,8 @@ ARG REVISION
 LABEL maintainer="Forrest Loomis (forrest.loomis@docker.com)"
 
 WORKDIR /home/app
+
+RUN apk --no-cache add ca-certificates
 
 COPY --from=builder /app/bin/go-api .
 
