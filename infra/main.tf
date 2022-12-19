@@ -1,21 +1,16 @@
-terraform {
-  backend "s3" {
-    bucket         = "nassau-state"
-    dynamodb_table = "nassau-state"
-    key            = "services/upload-api.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-  }
-}
-
-variable "access_key" {}
-variable "secret_key" {}
+# terraform {
+#   backend "s3" {
+#     bucket         = "nassau-state"
+#     dynamodb_table = "nassau-state"
+#     key            = "services/upload-api.tfstate"
+#     region         = "us-east-1"
+#     encrypt        = true
+#   }
+# }
 
 provider "aws" {
   region              = local.region
   allowed_account_ids = ["895216607862"]
-  access_key          = var.access_key
-  secret_key          = var.secret_key
 
   default_tags {
     tags = local.tags
