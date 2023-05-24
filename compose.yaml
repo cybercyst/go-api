@@ -13,8 +13,14 @@ services:
 
   backend:
     container_name: go-api
-    build:
-      dockerfile: Dockerfile.dev
+    build: .
+    x-develop:
+      watch:
+        - action: sync
+          path: ./flags.yaml
+          target: /app/flags.yaml
+        - action: rebuild
+          path: .
     env_file:
       - .env
     environment:
@@ -23,6 +29,3 @@ services:
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
       FILE_UPLOAD_BUCKET: ${FILE_UPLOAD_BUCKET:-}
-    volumes:
-      - .:/app
-
