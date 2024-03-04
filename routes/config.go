@@ -7,12 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lithammer/shortuuid/v4"
 	ffclient "github.com/thomaspoignant/go-feature-flag"
-	"github.com/thomaspoignant/go-feature-flag/ffuser"
+	"github.com/thomaspoignant/go-feature-flag/ffcontext"
 )
 
 func Config(g *gin.Context) {
-	user := ffuser.NewAnonymousUser(shortuuid.New())
-	testFlag, err := ffclient.BoolVariation("test-flag", user, false)
+	ctx := ffcontext.NewEvaluationContextBuilder(shortuuid.New()).AddCustom("anonymous", true).Build()
+	testFlag, err := ffclient.BoolVariation("test-flag", ctx, false)
 	if err != nil {
 		log.Fatal(err)
 	}
