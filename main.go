@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
 
@@ -11,7 +12,15 @@ import (
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/orm"
 	"github.com/google/uuid"
+	"github.com/kelseyhightower/envconfig"
 )
+
+type Config struct {
+	DatabaseUsername string
+	DatabasePassword string
+	DatabaseName     string
+	DatabaseAddress  string
+}
 
 type Widget struct {
 	ID          string `json:"id"`
@@ -126,19 +135,25 @@ func (s *Server) CreateWidget(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	dbUser := os.Getenv("DB_USERNAME")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
+	var c Config
+	err := envconfig.Process("api", &c)
+	if err != nil {
+		fmt.Printf("problem parsing config: %s\n", err.Error())
+		os.Exit(1)
+	}
+
 	db := pg.Connect(&pg.Options{
-		User:     dbUser,
-		Password: dbPassword,
-		Database: dbName,
+		User:     c.DatabaseUsername,
+		Password: c.DatabasePassword,
+		Database: c.DatabaseName,
+		Addr:     c.DatabaseAddress,
 	})
 	defer db.Close()
 
-	err := createSchema(db)
+	err = createSchema(db)
 	if err != nil {
-		panic(err)
+		fmt.Printf("problem creating schema: %s\n", err.Error())
+		os.Exit(1)
 	}
 
 	srv := NewServer(db)
