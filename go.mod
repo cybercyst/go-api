@@ -1,6 +1,7 @@
 module go-api
 
-go 1.22.0
+go 1.23.0
+
 toolchain go1.24.1
 
 require (
@@ -22,7 +23,7 @@ require (
 )
 
 require (
-	github.com/go-chi/chi/v5 v5.1.0
+	github.com/go-chi/chi/v5 v5.2.2
 	github.com/go-chi/render v1.0.3
 	github.com/go-pg/pg/v10 v10.13.0
 	github.com/google/uuid v1.6.0
