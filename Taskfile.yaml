@@ -20,4 +20,4 @@ tasks:
   build:
     desc: Build
     cmds:
-      - docker build --target=build -t service .
+      - docker build --target=build -t go-api .
