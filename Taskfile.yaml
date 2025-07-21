@@ -1,0 +1,23 @@
+version: "3"
+
+tasks:
+  dev:
+    desc: Run the Go Cha service using Docker Compose
+    cmds:
+      - docker compose up --build
+    interactive: true
+
+  lint:
+    desc: Run lint
+    cmds:
+      - docker build --target=lint .
+
+  test:
+    desc: Run tests
+    cmds:
+      - docker build --target=test .
+
+  build:
+    desc: Build
+    cmds:
+      - docker build --target=build -t service .
