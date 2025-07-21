@@ -30,7 +30,7 @@ RUN go build -o /bin/server .
 FROM gcr.io/distroless/static-debian11 as prod
 
 WORKDIR /app
-COPY --from=build /server /bin/server
+COPY --from=build /bin/server /bin/server
 
 EXPOSE 3000
 ENTRYPOINT ["/bin/server"]
