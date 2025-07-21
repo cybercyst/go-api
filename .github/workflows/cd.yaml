@@ -15,7 +15,7 @@ jobs:
     outputs:
       run: "${{ steps.changes.outputs.code == 'true' }}"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - id: version
@@ -43,7 +43,7 @@ jobs:
     needs:
       - changes
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - id: current_version
@@ -62,7 +62,7 @@ jobs:
       - changes
       - version
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Create Tag
         uses: rickstaa/action-create-tag@v1
         with:
@@ -78,23 +78,23 @@ jobs:
       - version
       - tag
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Hub Login
         uses: docker/login-action@v2
         with:
           username: forrestloomis786
           password: ${{ secrets.DOCKER_HUB_PAT }}
       - name: Build and Push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: .
+          target: prod
           push: true
           tags: |
             forrestloomis786/upload-api:${{ needs.version.outputs.version }}
             forrestloomis786/upload-api:latest
           labels: |
-            com.docker.image.source.entrypoint=Dockefile
+            com.docker.image.source.entrypoint=Dockerfile
       - name: Rollback
         if: failure()
         run: git push --delete origin ${{ needs.version.outputs.version_tag }}
-
