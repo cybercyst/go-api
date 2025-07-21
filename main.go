@@ -16,10 +16,10 @@ import (
 )
 
 type Config struct {
-	DatabaseUsername string
-	DatabasePassword string
-	DatabaseName     string
-	DatabaseAddress  string
+	DatabaseUsername string `envconfig:"DATABASE_USERNAME"`
+	DatabasePassword string `envconfig:"DATABASE_PASSWORD"`
+	DatabaseName     string `envconfig:"DATABASE_NAME"`
+	DatabaseAddress  string `envconfig:"DATABASE_ADDRESS"`
 }
 
 type Widget struct {
@@ -175,7 +175,7 @@ func main() {
 }
 
 func createSchema(db *pg.DB) error {
-	models := []interface{}{
+	models := []any{
 		(*Widget)(nil),
 	}
 
