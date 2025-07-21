@@ -164,6 +164,13 @@ func main() {
 	// r.Use(middleware.Recoverer)
 	// r.Use(middleware.URLFormat)
 	r.Use(render.SetContentType(render.ContentTypeJSON))
+	r.Get("/pong", func(w http.ResponseWriter, r *http.Request) {
+		_, err := w.Write([]byte("pong"))
+		if err != nil {
+			_ = render.Render(w, r, ErrRender(err))
+			return
+		}
+	})
 	r.Route("/widgets", func(r chi.Router) {
 		r.Get("/", srv.ListWidgets)
 		r.Post("/", srv.CreateWidget)
