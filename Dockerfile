@@ -27,7 +27,7 @@ FROM base AS build
 RUN go build -o /bin/server .
 
 # ---------------------------- prod stage -------------------------------
-FROM gcr.io/distroless/static-debian11 as prod
+FROM gcr.io/distroless/static-debian11 AS prod
 
 WORKDIR /app
 COPY --from=build /bin/server /bin/server
