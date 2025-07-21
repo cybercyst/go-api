@@ -1,31 +1,40 @@
 services:
-  proxy:
-    image: nginx
-    volumes:
-      - type: bind
-        source: ./proxy/nginx.conf
-        target: /etc/nginx/conf.d/default.conf
-        read_only: true
-    ports:
-      - 8080:80
-    depends_on:
-      - backend
-
   backend:
     container_name: go-api
-    build: .
-    x-develop:
-      watch:
-        - action: sync
-          path: ./flags.yaml
-          target: /app/flags.yaml
-        - action: rebuild
-          path: .
+    build:
+      context: .
+      target: dev
     env_file:
       - .env
+    volumes:
+      - .:/src
+    working_dir: /src
+    ports:
+      - 3000:3000
     environment:
       ENV: ${ENV:-dev}
       PODNAME: ${PODNAME:-go-api}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
       FILE_UPLOAD_BUCKET: ${FILE_UPLOAD_BUCKET:-}
+      DATABASE_USERNAME: username
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: go-api
+      DATABASE_ADDRESS: db:5432
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: go-api
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
