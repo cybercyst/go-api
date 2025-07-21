@@ -32,5 +32,5 @@ FROM gcr.io/distroless/static-debian11 as prod
 WORKDIR /app
 COPY --from=build /server /bin/server
 
-EXPOSE 8080
+EXPOSE 3000
 ENTRYPOINT ["/bin/server"]
