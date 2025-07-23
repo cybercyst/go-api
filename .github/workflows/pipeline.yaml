@@ -8,4 +8,4 @@ on:
 
 jobs:
   run:
-    uses: cybercyst/go-api/.github/workflows/ci.yaml@main
+    uses: cybercyst/github-actions/.github/workflows/ci.yaml@main
