@@ -25,7 +25,7 @@ require (
 require (
 	github.com/go-chi/chi/v5 v5.2.2
 	github.com/go-chi/render v1.0.3
-	github.com/go-pg/pg/v10 v10.14.0
+	github.com/go-pg/pg/v10 v10.15.0
 	github.com/google/uuid v1.6.0
 	github.com/kelseyhightower/envconfig v1.4.0
 )
